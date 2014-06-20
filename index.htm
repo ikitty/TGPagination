@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="gbk" />
+<meta name="author" content="iKitty" />
+<title>TGPanition demo</title>
+<link rel="stylesheet" href="dev.css" type="text/css" media="screen" />
+</head>
+<body>
+<div class="core">
+    <!--S 列表内容 -->
+    <div class="x_list">
+        <ul class="x_list_title">
+            <li>
+                <p class="c1">Order</p>
+                <p>Nick</p>
+                <p>Rank</p>
+                <p>Credit</p>
+            </li>
+        </ul>
+        <ul id="xList">
+            <li>
+                <p class="c1">001</p>
+                <p>loading...</p>
+                <p>loading...</p>
+                <p>loading...</p>
+            </li>
+        </ul>
+    </div>
+    <!--E 列表内容 -->
+
+    <div id="xPager" class="mod_pager">
+        <div dataType="btnPrev" class="mod_pager_dis">上一页</div>
+        <p class="mod_pager_cur">1</p>
+        <p >2</p>
+        <p >3</p>
+        <p >4</p>
+        <p >5</p>
+        <p >6</p>
+        <div dataType="btnNext">下一页</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="tgcommon.min.js"></script>
+<script type="text/javascript">
+    TJ(function () {
+        TJ.loadjs("tgpagination.js", '', 'utf-8');
+    });
+</script>
+</body>
+</html>
