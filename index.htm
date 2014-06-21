@@ -4,7 +4,7 @@
 <meta charset="gbk" />
 <meta name="author" content="iKitty" />
 <title>TGPanition demo</title>
-<link rel="stylesheet" href="dev.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="custom.css" type="text/css" media="screen" />
 </head>
 <body>
 <div class="core">
@@ -12,8 +12,8 @@
     <div class="x_list">
         <ul class="x_list_title">
             <li>
-                <p class="c1">Order</p>
-                <p>Nick</p>
+                <p class="c1">排名</p>
+                <p>昵稱</p>
                 <p>Rank</p>
                 <p>Credit</p>
             </li>
@@ -29,14 +29,13 @@
     </div>
     <!--E 列表内容 -->
 
+    <!--S 翻頁組件DOM -->
     <div id="tgPager" class="tgpager"></div>
+    <!--E 翻頁組件DOM -->
+
 </div>
 
-<script type="text/javascript" src="tgcommon.min.js"></script>
-<script type="text/javascript">
-    TJ(function () {
-        TJ.loadjs("tgpagination.js", '', 'utf-8');
-    });
-</script>
+<script type="text/javascript" src="tgpagination.js"></script>
+<script type="text/javascript" charset="utf-8" src="custom.js"></script>
 </body>
 </html>
