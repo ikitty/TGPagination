@@ -27,7 +27,7 @@ TGPager.prototype = {
     // create pager DOM element and get these DOM 
     ,createPage: function () {
         var wrap = this.pagerWrap,
-            sHtml = '<div tgpType="btnPrev" class="tgp_disabled">上一页</div>';
+            sHtml = '<div tgpType="btnFirst" class="tgp_disabled">首页</div><div tgpType="btnPrev" class="tgp_disabled">上一页</div>';
 
         for (var i = 1; i <= this.pageNum; i++) {
             if (1==i) {
@@ -36,12 +36,14 @@ TGPager.prototype = {
                 sHtml += '<p tgpOrder="' + i +'">' + i + '</p>';
             }
         };
-        sHtml += '<div tgpType="btnNext">下一页</div>';
+        sHtml += '<div tgpType="btnNext">下一页</div><div tgpType="btnEnd">尾页</div>';
         wrap.innerHTML = sHtml ;
 
         this.dom = {
-            btnPrev: wrap.getElementsByTagName('div')[0]
-            ,btnNext: wrap.getElementsByTagName('div')[1]
+            btnPrev: wrap.getElementsByTagName('div')[1]
+            ,btnFirst: wrap.getElementsByTagName('div')[0]
+            ,btnNext: wrap.getElementsByTagName('div')[2]
+            ,btnEnd: wrap.getElementsByTagName('div')[3]
             ,btn: wrap.getElementsByTagName('div')
             ,num: wrap.getElementsByTagName('p')
         };
@@ -65,7 +67,8 @@ TGPager.prototype = {
 
     // bind pager(Btn) click event
     ,btnClick: function () {
-        var me = this;
+        var me = this,
+            _type ;
         for (var i = 0, k = null; k = this.dom.btn[i] ; i++ ) {
             k.onclick = function () {
                 if (/\s*tgp_disabled\s*/gi.test(this.className)) {
@@ -73,10 +76,15 @@ TGPager.prototype = {
                 }
                 var lastOrder = Number(me.dom.lastNum.getAttribute('tgpOrder') ),
                     newOrder = 0;
-                if (this.getAttribute('tgpType') == 'btnPrev') {
+                _type = this.getAttribute('tgpType') ;
+                if (_type == 'btnPrev') {
                     newOrder = lastOrder - 1;
-                }else if (this.getAttribute('tgpType') == 'btnNext'){
+                }else if (_type == 'btnNext'){
                     newOrder = lastOrder + 1;
+                }else if (_type == 'btnFirst'){
+                    newOrder = 1;
+                }else if (_type == 'btnEnd'){
+                    newOrder = me.pageNum ;
                 }
 
                 me.dom.lastNum.className = me.dom.lastNum.className.replace('tgp_current', '');
@@ -91,13 +99,16 @@ TGPager.prototype = {
 
     // sync the status of btn and number
     ,statusChange: function (v) {
-        this.dom.btnPrev.className = '';
-        this.dom.btnNext.className = '';
+        for (var i = 0, k ; k = this.dom.btn[i] ; i++ ) {
+            k.className = '';
+        }
 
         if (v == 1) {
+            this.dom.btnFirst.className = 'tgp_disabled';
             this.dom.btnPrev.className = 'tgp_disabled';
         }else if (this.pageNum == v){
             this.dom.btnNext.className = 'tgp_disabled';
+            this.dom.btnEnd.className = 'tgp_disabled';
         }
     }
 };
